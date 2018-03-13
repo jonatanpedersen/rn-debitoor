@@ -1,0 +1,5 @@
+dependencies: \
+  /Users/carstend/Code/rn-debitoor/node_modules/react-native/Libraries/Vibration/RCTVibration.m \
+  /Users/carstend/Code/rn-debitoor/node_modules/react-native/Libraries/Vibration/RCTVibration.h \
+  /Users/carstend/Code/rn-debitoor/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /Users/carstend/Code/rn-debitoor/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h
