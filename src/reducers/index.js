@@ -3,7 +3,6 @@ import { combineReducers } from 'redux'
 import { DATA_AVAILABLE, FETCHED_REPOSITORIES } from '../actions/' //Import the actions types constant we defined in our actions
 
 let dataState = {data: [], loading: true}
-let githubState = {data: [], loading: true}
 
 const dataReducer = (state = dataState, action) => {
   switch (action.type) {
@@ -15,10 +14,13 @@ const dataReducer = (state = dataState, action) => {
   }
 }
 
-const github = (state = githubState, action) => {
-  switch (action.type) {
+let githubState = {data: [], loading: true}
+
+const github = (state = githubState, payload) => {
+  switch (payload.type) {
     case FETCHED_REPOSITORIES:
-      return Object.assign({}, state, {data: action.data, loading: false})
+      //payload.data.forEach(repo => console.log(repo.name, repo.owner.login, repo.stargazers_url))
+      return Object.assign({}, state, {data: payload.data, loading: false})
     default:
       return state
   }

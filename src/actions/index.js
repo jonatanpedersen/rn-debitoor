@@ -1,5 +1,6 @@
 export const DATA_AVAILABLE = 'DATA_AVAILABLE'
 export const FETCHED_REPOSITORIES = 'FETCHED_REPOSITORIES'
+export const COUNT_STARS = 'COUNT_STARS'
 
 //Import the sample data
 import Data from '../instructions.json'
@@ -22,6 +23,5 @@ export function fetchGithubRepositories () {
     fetch('https://api.github.com/repositories')
       .then(response => response.json())
       .then(data => dispatch({type: FETCHED_REPOSITORIES, data: data}))
-
   }
 }
