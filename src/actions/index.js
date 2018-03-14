@@ -1,27 +1,29 @@
-export const DATA_AVAILABLE = 'DATA_AVAILABLE'
-export const FETCHED_REPOSITORIES = 'FETCHED_REPOSITORIES'
-export const COUNT_STARS = 'COUNT_STARS'
+import { ACCESS_TOKEN } from '../../env'
+import { FETCHED_REPOSITORIES, SET_FAVORITE } from '../actions/actionTypes'
 
-//Import the sample data
-import Data from '../instructions.json'
-
-export function getData () {
+export function fetchRepositories () {
   return (dispatch) => {
-
-    //Make API Call
-    //For this example, I will be using the sample data in the json file
-    //delay the retrieval [Sample reasons only]
-    setTimeout(() => {
-      const data = Data.instructions
-      dispatch({type: DATA_AVAILABLE, data: data})
-    }, 500)
-  }
-}
-
-export function fetchGithubRepositories () {
-  return (dispatch) => {
-    fetch('https://api.github.com/repositories')
+    fetch(`https://api.github.com/repositories?access_token=${ACCESS_TOKEN}`)
       .then(response => response.json())
-      .then(data => dispatch({type: FETCHED_REPOSITORIES, data: data}))
+      .then(data => {
+        data.forEach((repo, index) => {
+          fetch(`https://api.github.com/repos/${repo.owner.login}/${repo.name}?access_token=${ACCESS_TOKEN}`)
+            .then(response => response.json())
+            .then(repo => data[index]['stargazers_count'] = repo.stargazers_count)
+        })
+
+        return data
+      })
+      .then(data => {
+        return dispatch({type: FETCHED_REPOSITORIES, data: data})
+      })
   }
 }
+
+export function setFavorite (item) {
+  console.log('here', item.id)
+  return (dispatch) => {
+    return dispatch({type: SET_FAVORITE, data: item})
+  }
+}
+

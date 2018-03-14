@@ -11,8 +11,6 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-import { FlatList } from '../components/FlatList'
-
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -25,67 +23,54 @@ class Home extends Component {
     this.state = {}
 
     this.renderItem = this.renderItem.bind(this)
+
+    //console.log(Actions)
   }
 
   componentDidMount () {
 
-    this.props.fetchGithubRepositories()
-    console.log(this.state)
-    //this.props.getData(); //call our action
+    this.props.fetchRepositories()
+    //this.props.getData() //call our action
   }
 
   render () {
-    if (this.props.loading) {
-      return (
-        <View style={styles.activityIndicatorContainer}>
-          <ActivityIndicator animating={true}/>
-        </View>
-      )
-    } else {
-      return (
-        <View style={{flex: 1, backgroundColor: '#F5F5F5', paddingTop: 20}}>
-          <FlatList
-            ref='listRef'
-            data={this.props.github}
-            renderItem={this.renderItem}
-            keyExtractor={(item, index) => index}/>
-        </View>
-      )
-    }
+    return (
+      <View style={{flex: 1, backgroundColor: '#F5F5F5', paddingTop: 20}}>
+        <FlatList
+          ref='listRef'
+          data={this.props.repositories}
+          renderItem={this.renderItem}
+          keyExtractor={(item, index) => index}/>
+      </View>
+    )
   }
 
   renderItem ({item, index}) {
     return (
-      <TouchableOpacity onPress={this._onPress(item)}>
+      <TouchableOpacity onPress={() => this.props.navigation.navigate('Details', {item: item})}>
         <View style={styles.row}>
           <Image
             style={{width: 50, height: 50}}
             source={{uri: item.owner.avatar_url}}
           />
           <Text style={styles.title}>
-            {item.name}
+            {parseInt(index) + 1}{'. '}
+            stars: {item.stargazers_count} //
+            id: {item.id} // {item.name}
           </Text>
           <Text style={styles.description}>
             {item.description}
           </Text>
-          <View>
-            <Text>Show this on click</Text>
-          </View>
         </View>
       </TouchableOpacity>
     )
-  }
-
-  _onPress = (item) => {
-    console.log(item)
   }
 }
 
 function mapStateToProps (state, props) {
   return {
-    //data: state.dataReducer.data,
-    github: state.github.data,
-    loading: state.github.loading,
+    repositories: state.repositories.data,
+    loading: state.repositories.loading,
   }
 }
 
