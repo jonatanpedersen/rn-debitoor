@@ -19,28 +19,25 @@ import * as Actions from '../actions'
 class Home extends Component {
   constructor (props) {
     super(props)
-
     this.state = {}
-
     this.renderItem = this.renderItem.bind(this)
-
-    //console.log(Actions)
   }
 
-  componentDidMount () {
-
-    this.props.fetchRepositories()
-    //this.props.getData() //call our action
+  componentWillMount () {
+    this.props.fetchRepositories('javascript')
   }
+
 
   render () {
     return (
-      <View style={{flex: 1, backgroundColor: '#F5F5F5', paddingTop: 20}}>
-        <FlatList
-          ref='listRef'
-          data={this.props.repositories}
-          renderItem={this.renderItem}
-          keyExtractor={(item, index) => index}/>
+      <View style={styles.container}>
+
+        {this.props.loading && <ActivityIndicator size="large"/>}
+
+        <FlatList ref='listRef'
+                  data={this.props.repositories}
+                  renderItem={this.renderItem}
+                  keyExtractor={(item, index) => index}/>
       </View>
     )
   }
@@ -49,18 +46,11 @@ class Home extends Component {
     return (
       <TouchableOpacity onPress={() => this.props.navigation.navigate('Details', {item: item})}>
         <View style={styles.row}>
-          <Image
-            style={{width: 50, height: 50}}
-            source={{uri: item.owner.avatar_url}}
-          />
-          <Text style={styles.title}>
-            {parseInt(index) + 1}{'. '}
-            stars: {item.stargazers_count} //
-            id: {item.id} // {item.name}
-          </Text>
-          <Text style={styles.description}>
-            {item.description}
-          </Text>
+          <Image style={styles.image}
+                 source={{uri: item.owner.avatar_url}}/>
+          <Text style={styles.title}>{parseInt(index) + 1}{'. '}{item.name}</Text>
+          <Text>{item.stargazers_count.toLocaleString()} stars</Text>
+          <Text style={styles.description}>{item.description}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -82,13 +72,9 @@ function mapDispatchToProps (dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
 
 const styles = StyleSheet.create({
-  activityIndicatorContainer: {
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-  },
 
+  container: {flex: 1, backgroundColor: '#F5F5F5', paddingTop: 20},
+  image: {width: 50, height: 50},
   row: {
     borderBottomWidth: 1,
     borderColor: '#ccc',

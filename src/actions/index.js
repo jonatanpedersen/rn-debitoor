@@ -1,29 +1,30 @@
 import { ACCESS_TOKEN } from '../../env'
-import { FETCHED_REPOSITORIES, SET_FAVORITE } from '../actions/actionTypes'
+import { FETCHED_REPOSITORIES, SET_FAVORITE, FETCH_PULLS, RESET_PULLS } from '../actions/actionTypes'
 
-export function fetchRepositories () {
+export function fetchRepositories (language) {
   return (dispatch) => {
-    fetch(`https://api.github.com/repositories?access_token=${ACCESS_TOKEN}`)
+    //fetch(`https://api.github.com/repositories?access_token=${ACCESS_TOKEN}`)
+    fetch(`https://api.github.com/search/repositories?q=language:${language}&sort=stars&access_token=${ACCESS_TOKEN}`)
       .then(response => response.json())
-      .then(data => {
-        data.forEach((repo, index) => {
-          fetch(`https://api.github.com/repos/${repo.owner.login}/${repo.name}?access_token=${ACCESS_TOKEN}`)
-            .then(response => response.json())
-            .then(repo => data[index]['stargazers_count'] = repo.stargazers_count)
-        })
-
-        return data
-      })
-      .then(data => {
-        return dispatch({type: FETCHED_REPOSITORIES, data: data})
+      .then((data) => {
+        return dispatch({type: FETCHED_REPOSITORIES, data: data.items})
       })
   }
 }
 
 export function setFavorite (item) {
-  console.log('here', item.id)
   return (dispatch) => {
-    return dispatch({type: SET_FAVORITE, data: item})
+    return dispatch({type: SET_FAVORITE, id: item.id})
+  }
+}
+
+export function getPulls (url) {
+  return (dispatch) => {
+
+    fetch(`${url.split('{')[0]}?access_token=${ACCESS_TOKEN}`)
+      .then(response => response.json())
+      .then(data => dispatch({type: FETCH_PULLS, data: data})
+      )
   }
 }
 
