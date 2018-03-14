@@ -41,7 +41,7 @@ class Details extends Component {
           <Text style={styles.title}>{this.props.item.item.name}</Text>
           <Text>{this.props.item.item.description}</Text>
         </View>
-<Button title={'Add to favorite'} onPress={()=>this.handleFavorite()} />
+        <Button title={'Add to favorite'} onPress={() => this.handleFavorite()}/>
         <View>
           <Text style={styles.pullsTitle}>Pull requests</Text>
           {this.props.loading && <ActivityIndicator size="large"/>}
@@ -79,7 +79,7 @@ class Details extends Component {
     )
   }
 
-  handleFavorite(){
+  handleFavorite () {
     return this.props.setFavorite(this.props.item.item)
   }
 }

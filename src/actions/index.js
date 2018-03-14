@@ -20,7 +20,6 @@ export function setFavorite (item) {
 
 export function getPulls (url) {
   return (dispatch) => {
-
     fetch(`${url.split('{')[0]}?access_token=${ACCESS_TOKEN}`)
       .then(response => response.json())
       .then(data => dispatch({type: FETCH_PULLS, data: data})

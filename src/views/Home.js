@@ -8,6 +8,7 @@ import {
   Text,
   ActivityIndicator,
   Image,
+  Button,
   TouchableOpacity
 } from 'react-native'
 
@@ -51,11 +52,13 @@ class Home extends Component {
           <Text style={styles.title}>{parseInt(index) + 1}{'. '}{item.name}</Text>
           <Text>{item.stargazers_count.toLocaleString()} stars</Text>
           <Text style={styles.description}>{item.description}</Text>
+          <Button title={'Add to favorite'} onPress={() => this.props.setFavorite(item)}/>
         </View>
       </TouchableOpacity>
     )
   }
 }
+
 
 function mapStateToProps (state, props) {
   return {

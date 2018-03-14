@@ -24,12 +24,11 @@ Second tab
 - [ x ] Fetch repos
 - [ x ] Display repos
 - [ x ] onPress navigate to DetailsScreen
-- [] Sort repos by stars
 
 ### Details screen
-- [] Set favorites
+- [ x ] Set favorites
 - [ x ] Show PR's
 
 ### Favorites
-- [] Show my favorites
+- [ x ] Show my favorites
 - [] Unfavorite repo
