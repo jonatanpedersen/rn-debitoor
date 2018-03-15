@@ -28,7 +28,6 @@ class Home extends Component {
     this.props.fetchRepositories('javascript')
   }
 
-
   render () {
     return (
       <View style={styles.container}>
@@ -52,13 +51,11 @@ class Home extends Component {
           <Text style={styles.title}>{parseInt(index) + 1}{'. '}{item.name}</Text>
           <Text>{item.stargazers_count.toLocaleString()} stars</Text>
           <Text style={styles.description}>{item.description}</Text>
-          <Button title={'Add to favorite'} onPress={() => this.props.setFavorite(item)}/>
         </View>
       </TouchableOpacity>
     )
   }
 }
-
 
 function mapStateToProps (state, props) {
   return {
@@ -75,8 +72,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home)
 
 const styles = StyleSheet.create({
 
-  container: {flex: 1, backgroundColor: '#F5F5F5', paddingTop: 20},
-  image: {width: 50, height: 50},
+  container: {
+    flex: 1,
+    backgroundColor: '#F5F5F5',
+    paddingTop: 20
+  },
+
+  image: {
+    width: 50,
+    height: 50
+  },
+
   row: {
     borderBottomWidth: 1,
     borderColor: '#ccc',

@@ -63,10 +63,8 @@ class Details extends Component {
     return (
       <View style={styles.row}>
         <View>
-          <Image
-            style={styles.image}
-            source={{uri: item.user.avatar_url}}
-          />
+          <Image style={styles.image}
+                 source={{uri: item.user.avatar_url}}/>
           <Text>{item.user.login}</Text>
         </View>
         <View>
