@@ -32,4 +32,4 @@ Second tab
 
 ### Favorites
 - [ x ] Show my favorites
-- [] Unfavorite repo
+- [ ] Unfavorite repo
