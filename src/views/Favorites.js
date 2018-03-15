@@ -6,7 +6,6 @@ import {
   Button,
   Text,
   Image,
-  ActivityIndicator
 } from 'react-native'
 import * as Actions from '../actions'
 import { connect } from 'react-redux'
@@ -17,9 +16,8 @@ class Favorites extends Component {
   constructor (props) {
     super(props)
   }
-
+  
   render () {
-    console.log(this.props.favorites.length)
     return (
       <View style={styles.container}>
         {this.props.favorites.length === 0
@@ -28,7 +26,6 @@ class Favorites extends Component {
                       data={this.props.favorites}
                       renderItem={this.renderItem}
                       keyExtractor={(item, index) => index}/>}
-
       </View>
     )
   }
@@ -44,7 +41,6 @@ class Favorites extends Component {
       </View>
     )
   }
-
 }
 
 function filterRepos (repos, ids) {

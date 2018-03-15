@@ -7,10 +7,10 @@ let initialState = {
 const repositories = (state = initialState, payload) => {
   switch (payload.type) {
     case SET_FAVORITE:
-      return {
-        ...state,
-        ids: state.ids.concat(payload.id)
+      if (state.ids.includes(payload.id) === false) {
+        return {...state, ids: state.ids.concat(payload.id)}
       }
+      return state
     default:
       return state
   }

@@ -19,6 +19,7 @@ Second tab
 - [ x ] Setup redux
 - [ x ] Setup tabs
 - [ ] Setup stack navigator (for DetailsScreen)
+- [ ] Write tests
  
 ### Home screen
 - [ x ] Fetch repos

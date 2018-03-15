@@ -1,5 +1,5 @@
 import { ACCESS_TOKEN } from '../../env'
-import { FETCHED_REPOSITORIES, SET_FAVORITE, FETCH_PULLS, RESET_PULLS } from '../actions/actionTypes'
+import { FETCH_REPOSITORIES, SET_FAVORITE, FETCH_PULLS } from '../actions/actionTypes'
 
 export function fetchRepositories (language) {
   return (dispatch) => {
@@ -7,7 +7,7 @@ export function fetchRepositories (language) {
     fetch(`https://api.github.com/search/repositories?q=language:${language}&sort=stars&access_token=${ACCESS_TOKEN}`)
       .then(response => response.json())
       .then((data) => {
-        return dispatch({type: FETCHED_REPOSITORIES, data: data.items})
+        return dispatch({type: FETCH_REPOSITORIES, data: data.items})
       })
   }
 }

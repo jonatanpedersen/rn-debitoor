@@ -1,4 +1,4 @@
-import { FETCHED_REPOSITORIES } from '../actions/actionTypes'
+import { FETCH_REPOSITORIES } from '../actions/actionTypes'
 
 let initialState = {
   loading: true,
@@ -7,7 +7,7 @@ let initialState = {
 
 const repositories = (state = initialState, payload) => {
   switch (payload.type) {
-    case FETCHED_REPOSITORIES:
+    case FETCH_REPOSITORIES:
       return Object.assign({}, state, {data: payload.data, loading: false})
     default:
       return state

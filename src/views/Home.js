@@ -71,7 +71,6 @@ function mapDispatchToProps (dispatch) {
   return bindActionCreators(Actions, dispatch)
 }
 
-//Connect everything
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
 
 const styles = StyleSheet.create({
