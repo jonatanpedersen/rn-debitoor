@@ -5,15 +5,9 @@ let initialState = {
 }
 
 const repositories = (state = initialState, payload) => {
-  switch (payload.type) {
-    case SET_FAVORITE:
-      if (state.ids.includes(payload.id) === false) {
-        return {...state, ids: state.ids.concat(payload.id)}
-      }
-      return state
-    default:
-      return state
-  }
+  return (payload.type === 'SET_FAVORITE' && !state.ids.includes(payload.id)) 
+      ? {...state, ids: state.ids.concat(payload.id)}
+      : state;
 }
 
 export default repositories
